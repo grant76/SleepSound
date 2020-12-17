@@ -54,16 +54,29 @@ To predict disturbing noise we will use a neural network, which is a type of mac
 
 #### Machine Learning Model
 
-For our project we have decided to employ a Long-Short Term Memory (LSTM) neural network.  This architecture falls under the umbrella of Recurrent Neural Networks (RNN).  LTSMs are able to use long-term dependencies to eliminate the memory issues of traditional RNNs (Olah, 2015).  Long-term memory provides context to the algorithm leading to more accurate outputs compared to other RNNs. This architecture is effective in handling time sequence data (Jeyakumar, Rec 2020 11 02) and thus will pair with our input of a sound signal’s magnitude over time.  The style of LSTM we will be using is the vanilla LSTM as referred to by (Greff, et al., 2017).  It is a baseline that performs well on various data inputs and, with modifications, curtails computational costs and the number of parameters without significant performance loss (Greff, et al., 2017).  These modifications include omitting the peephole connections and connecting the forget gates.  The reductions in run time and data overhead will scale down training time and lead to faster implementation. This is crucial given the short amount of time to finish our project.  There is also plenty of existing code for the LSTMs, such as (Jeyakumar, activity94/Activity-Recognition), (Karpathy, 2015), and (Phi, 2020).  These will be a foundation from which we build and tune our neural network.  
+We implemented a one dimensional convolutional neural network (CNN) created using Edge Impulse Studio (EIS) [Audio Classification, Resources].  The CNN was employed to classify time-series audio data into two categories, disturbance and no disturbance.  This identification allows for our compatible android application to modulate the magnitude at which it plays calming sounds.  EIS is a comprehensive suite of tools to build, train, and deploy neural networks.  This software also contains an integrated data collection and labeling system which makes this typically tedious task more efficient. 
 
-The LSTM will be coded, trained, and validated in Tensorflow using Google Colab.  The training data will include both pre-existing datasets from online sources and sensor data from the microphone on an Arduino Nano 33 Sense.  This microcontroller will also be the platform on which the LSTM will be run once it has been trained.  This will be achieved by converting the Tensorflow code into a Tensorflow Lite model that will be interpreted and loaded onto the Arduino.  The sole input of the model will be a data channel produced by the Arduino’s onboard microphone.  The information in this channel will include the magnitude in decibels of the environment and a timestamp.
+The CNN was built using Keras in Tensorflow on EIS. Using EIS, the final model was converted to Arduino libraries using Tensorflow Lite.  
 
-The output of our LSTM will be the prediction of the volume of ambient sound in an environment.  This value will be transmitted to a smart phone application that will generate white noise to counteract any sounds that will disturb a sleeping individual.  The magnitude of the white noise will be proportional to the output value of the LSTM.
-
+Originally our team had planned to use a Long-Short Term Memory (LSTM) model.  In the end, we chose a CNN due to Edge Impulse Studio’s audio classification tools.  They are specifically tuned to CNNs and produced excellent results in our binary classification.  Also, the system’s ease of use was hard to overlook.  The process from data acquisition to deployment was nearly seamless.
 
 #### Data
 
+Audio data was collected on the Arduino Nano using the acquisition tools available in Edge Impulse Studio (EIS).  The Arduino uses a pulse density modulation (PDM) scheme to capture audio data.  PDM keeps noise low in the desired frequency band, thus improving signal integrity (Kite).  The EIS tools were intuitive and efficient.  They provided a GUI to interface directly with the Arduino that allowed us to easily capture and label the data.  It also handled the reshaping of data to be input into our machine learning model.
+
+In regards to a no disturbance, audio was recorded in quiet rooms with a lack of abrupt sounds.
+
+For the disturbance data, we sought out disruptive sounds around bedroom areas.  Dissonant noises produced data that was most distinguishable from an ideal sleeping environment.  These disturbances included, but were not limited to, human voices, items falling to the ground, and doors being shut.  Consonant sounds, such as running appliances, were much more similar to a quiet surroundings and thus made up a smaller proportion of our dataset. 
+
+All of our labelled audio data is available on the github repository linked above.
+
 #### Testing and Success
+
+Once our data was collected, the next goal was to determine when a noise of disturbing levels had occurred.  The CNN was trained and produced an astounding 99% accuracy on the validation data.  Our self-imposed success metric for testing was to classify with at least 90% accuracy.  The model passed with flying colors with an accuracy of 98%.
+
+In total we recorded just about 70 minutes of audio, with sixty percent disturbance and the rest no disturbance.  This data was split 80-20-20 for training, validation, and testing. The model uses a batch size of 256, the Adam optimizer, and a binary cross entropy loss function.  It was trained over two-hundred epochs.  This CNN produced an accuracy of 99.6% with a confusion matrix [(99.8% 0.2%) (0.8% 99.2%)].  This model also performed well in testing.  It produced an accuracy of 98.6% on 12 minutes of audio.
+
+From our point of view, these results may not be fully indicative of real world conditions.  The data collected was from a limited number of sources that were available to us given the current pandemic.  These sources include human voices, household appliances, dropped items, loud movement, and silent rooms.  The model may have been too finely tuned to the recording  surroundings and may not perform as well in new environments.
 
 ### Future Works
 
@@ -127,6 +140,8 @@ Jeyakumar, J. V. vikranth94/Activity-Recognition. GitHub (2020). Available at: [
 Karpathy, A. The Unreasonable Effectiveness of Recurrent Neural Networks (2015). Available at: [http://karpathy.github.io/2015/05/21/rnn-effectiveness/](http://karpathy.github.io/2015/05/21/rnn-effectiveness/). (Accessed: 6th November 2020)
 
 K. Greff, R. K. Srivastava, J. Koutník, B. R. Steunebrink and J. Schmidhuber, "LSTM: A Search Space Odyssey," in IEEE Transactions on Neural Networks and Learning Systems, vol. 28, no. 10, pp. 2222-2232, Oct. 2017, doi: 10.1109/TNNLS.2016.2582924.
+
+Kite, T. Understanding PDM Digital Audio. Available at: [http://users.ece.utexas.edu/~bevans/courses/rtdsp/lectures/10_Data_Conversion/AP_Understanding_PDM_Digital_Audio.pdf](http://users.ece.utexas.edu/~bevans/courses/rtdsp/lectures/10_Data_Conversion/AP_Understanding_PDM_Digital_Audio.pdf).  
 
 Olah, C. Understanding LSTM Networks. Understanding LSTM Networks -- colah's blog (2015). Available at: [https://colah.github.io/posts/2015-08-Understanding-LSTMs/](https://colah.github.io/posts/2015-08-Understanding-LSTMs/). (Accessed: 6th November 2020)
 
