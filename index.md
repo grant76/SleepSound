@@ -12,9 +12,9 @@ Derek Wong and Grant Young
 
 ### Links
 
-[Presentation:](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4923834/)
+[Presentation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4923834/)
 
-[Github Repository:](https://github.com/grant76/SleepSound)
+[Github Repository](https://github.com/grant76/SleepSound)
 
 ### Proposal Abstract 
 
