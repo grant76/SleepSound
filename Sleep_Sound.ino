@@ -72,9 +72,6 @@ void setup()
         return;
     }
 
-    // Ensure serial port is ready
-    while (!Serial);
-
     //Initialize built-in LED on Arduino Nano 33 BLE for BLE connection purposes
     pinMode(LED_BUILTIN, OUTPUT);
 
