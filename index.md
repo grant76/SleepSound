@@ -67,6 +67,8 @@ The output of our LSTM will be the prediction of the volume of ambient sound in 
 
 ### Future Works
 
+For future iterations of this project we’d like to make our model multi-class and predict the maximum magnitude of the audio signal.  A multiclass neural network would be more generalized and robust.  To use more than two classes, we’d need to collect quality audio data from a wide variety of sources.  In regards to predictions, we’d implement a regression model in addition to the classification currently used.  Predicting the loudest noise would allow our noise generating application to better mitigate the disturbance.
+
 ### Timeline and Deliverables
 
 Week 5:  
