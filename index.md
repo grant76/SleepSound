@@ -121,6 +121,13 @@ Week 10:
 
 #### Resources
 
+[Edge Impulse Studio](https://studio.edgeimpulse.com/)
+
+[Audio Classification](https://docs.edgeimpulse.com/docs/audio-classification)
+
+[Collecting Data through Edge Impulse Studio using Arduino](https://docs.edgeimpulse.com/docs/arduino-nano-33-ble-sense)
+
+
 #### References
 
 Farokhnezhad Afshar, P., Bahramnezhad, F., Asgari, P. & Shiri, M. Effect of White Noise on Sleep in Patients Admitted to a Coronary Care. Journal of caring sciences (2016). Available at: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4923834/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4923834/). (Accessed: 3rd November 2020) 
