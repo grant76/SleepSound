@@ -10,6 +10,11 @@ Mitigating the impact of sound on sleep.
 
 Derek Wong and Grant Young
 
+### Links
+
+[Presentation:](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4923834/)
+
+[Github Repository:](https://github.com/grant76/SleepSound)
 
 ### Proposal Abstract 
 
@@ -34,7 +39,20 @@ Our system would consist of a microcontroller that’s constantly monitoring the
 To predict disturbing noise we will use a neural network, which is a type of machine learning algorithm. This network will use ambient noise as an input to determine if a sound disturbance will occur and its magnitude.  The neural network will be deployed on an embedded microcontroller.  This provides flexibility in the environment where our machine learning model can be used.  The microcontroller will communicate the neural network’s prediction to a noise generator to counteract ambient sound throughout the night.
 
 
+### Hardware
+
+-Arduino Nano 33 Sennse BLE
+-Oneplus 5
+
+### Software
+
+-Arduino IDE
+-Edge Impulse Studio
+-Android Studio
+
 ### Machine Learning
+
+#### Machine Learning Model
 
 For our project we have decided to employ a Long-Short Term Memory (LSTM) neural network.  This architecture falls under the umbrella of Recurrent Neural Networks (RNN).  LTSMs are able to use long-term dependencies to eliminate the memory issues of traditional RNNs (Olah, 2015).  Long-term memory provides context to the algorithm leading to more accurate outputs compared to other RNNs. This architecture is effective in handling time sequence data (Jeyakumar, Rec 2020 11 02) and thus will pair with our input of a sound signal’s magnitude over time.  The style of LSTM we will be using is the vanilla LSTM as referred to by (Greff, et al., 2017).  It is a baseline that performs well on various data inputs and, with modifications, curtails computational costs and the number of parameters without significant performance loss (Greff, et al., 2017).  These modifications include omitting the peephole connections and connecting the forget gates.  The reductions in run time and data overhead will scale down training time and lead to faster implementation. This is crucial given the short amount of time to finish our project.  There is also plenty of existing code for the LSTMs, such as (Jeyakumar, activity94/Activity-Recognition), (Karpathy, 2015), and (Phi, 2020).  These will be a foundation from which we build and tune our neural network.  
 
@@ -42,6 +60,12 @@ The LSTM will be coded, trained, and validated in Tensorflow using Google Colab.
 
 The output of our LSTM will be the prediction of the volume of ambient sound in an environment.  This value will be transmitted to a smart phone application that will generate white noise to counteract any sounds that will disturb a sleeping individual.  The magnitude of the white noise will be proportional to the output value of the LSTM.
 
+
+#### Data
+
+#### Testing and Success
+
+### Future Works
 
 ### Timeline and Deliverables
 
