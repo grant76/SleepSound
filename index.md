@@ -107,11 +107,9 @@ Week 10:
 
 #### Resources
 
-[Edge Impulse Studio](https://studio.edgeimpulse.com/)
-
-[Audio Classification](https://docs.edgeimpulse.com/docs/audio-classification)
-
-[Collecting Data through Edge Impulse Studio using Arduino](https://docs.edgeimpulse.com/docs/arduino-nano-33-ble-sense)
+- [Edge Impulse Studio](https://studio.edgeimpulse.com/)
+- [Audio Classification](https://docs.edgeimpulse.com/docs/audio-classification)
+- [Collecting Data through Edge Impulse Studio using Arduino](https://docs.edgeimpulse.com/docs/arduino-nano-33-ble-sense)
 
 
 #### References
