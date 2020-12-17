@@ -42,12 +42,15 @@ To predict disturbing noise we will use a neural network, which is a type of mac
 ### Hardware
 
 -Arduino Nano 33 Sennse BLE
+
 -Oneplus 5
 
 ### Software
 
 -Arduino IDE
+
 -Edge Impulse Studio
+
 -Android Studio
 
 ### Machine Learning
@@ -70,18 +73,17 @@ The output of our LSTM will be the prediction of the volume of ambient sound in 
 ### Timeline and Deliverables
 
 Week 5:  
-Write software for LSTM.  
-Find datasets to train the model.
-Research and finalize total hardware system design.
-Research human-computer interaction.
+Write software for neural network model.  
+Collect training data.
+Research hardware system design.
 
 Week 6:  
 Gather more data using Arduino.  
-Continue writing LSTM software.
+Continue writing software for neural network.
 Write software for hardware integration.
 
 Week 7:  
-Train and tune the LSTM using training and validation data.
+Train and tune the network using gathered data.
 Test model for accuracy. 
 Write software for human-computer interaction.
   
@@ -91,13 +93,16 @@ Convert the model and deploy it on our embedded system.
 
 Week 9:  
 Test the whole system:
-LSTM model deployment on Arduino
-Hardware integration
-Human-computer interaction integration
+CNN model deployment on Arduino.
+Hardware integration.
+Human-computer interaction integration.
 
-Week 10:  Finalize system.
+Week 10:  
+Finalize system. 
+Submit documentation.
 
 
+#### Resources
 
 #### References
 
