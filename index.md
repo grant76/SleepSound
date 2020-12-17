@@ -137,4 +137,14 @@ K. Greff, R. K. Srivastava, J. Koutník, B. R. Steunebrink and J. Schmidhuber, "
 
 Olah, C. Understanding LSTM Networks. Understanding LSTM Networks -- colah's blog (2015). Available at: [https://colah.github.io/posts/2015-08-Understanding-LSTMs/](https://colah.github.io/posts/2015-08-Understanding-LSTMs/). (Accessed: 6th November 2020)
 
-Phi, M. Illustrated Guide to LSTM's and GRU's: A step by step explanation. Medium (2020). Available at: [https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21](https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21). (Accessed: 6th November 2020) 
+Phi, M. Illustrated Guide to LSTM's and GRU's: A step by step explanation. Medium (2020). Available at: [https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21](https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21). (Accessed: 6th November 2020)
+
+Project IBID: Interaction Between Intelligent Devices. IBID Available at: [https://yifax.github.io/IBID/](https://yifax.github.io/IBID/).  
+
+REM Sleep Tracker. REMtrack Available at: [https://ciankc.github.io/REMtrack/](https://ciankc.github.io/REMtrack/).  
+
+Sayyad, R. A. How to Use Convolutional Neural Networks for Time Series Classification. (2020). Available at: [https://medium.com/@Rehan_Sayyad/how-to-use-convolutional-neural-networks-for-time-series-classification-80575131a474](https://medium.com/@Rehan_Sayyad/how-to-use-convolutional-neural-networks-for-time-series-classification-80575131a474).  
+
+TensorFlow Lite inference. Available at: [https://www.tensorflow.org/lite/guide/inference](https://www.tensorflow.org/lite/guide/inference).  
+
+Writer, T. E. Audio Classification Using CNN - Coding Example. (2019). Available at: [https://medium.com/x8-the-ai-community/audio-classification-using-cnn-coding-example-f9cbd272269e](https://medium.com/x8-the-ai-community/audio-classification-using-cnn-coding-example-f9cbd272269e).    
