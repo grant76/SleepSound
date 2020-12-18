@@ -79,12 +79,14 @@ Once our data was collected, the next goal was to determine when a noise of dist
 In total we recorded just about 70 minutes of audio, with sixty percent disturbance and the rest no disturbance.  This data was split 80-20-20 for training, validation, and testing. The model uses a batch size of 256, the Adam optimizer, and a binary cross entropy loss function.  It was trained over two-hundred epochs.  This CNN produced an accuracy of 99.6% with a confusion matrix [(99.8% 0.2%) (0.8% 99.2%)].  This model also performed well in testing.  It produced an accuracy of 98.6% on 12 minutes of audio.
 
 ![Validation Accuracy](https://user-images.githubusercontent.com/42701588/102658105-c2a62680-412b-11eb-9550-6cca47a19e75.png)
+
 Validation Accuracy
 
 ![Test Accuracy](https://user-images.githubusercontent.com/42701588/102658177-e8333000-412b-11eb-8725-89c3c4ef567a.png)
+
 Test Accuracy
 
-From our point of view, these results may not be fully indicative of real world conditions.  The data collected was from a limited number of sources that were available to us given the current pandemic.  These sources include human voices, household appliances, dropped items, loud movement, and silent rooms.  The model may have been too finely tuned to the recording  surroundings and may not perform as well in new environments.
+From our point of view, these results may not be fully indicative of real world conditions.  The data collected was from a limited number of sources that were available to us given the current pandemic.  These sources include human voices, household appliances, dropped items, loud movement, and silent rooms.  The model may have been too finely tuned to the our immediate surroundings and may not generalized enough to perform well in new environments.
 
 ### Arduino Implementation
 
