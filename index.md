@@ -88,6 +88,8 @@ The purpose of the Android application is to basically connect the user to the m
 
 The operation of the application is best illustrated using a finite state machine. There’s a total of 5 states: scan (default), found, connected, play, and time-out.
 
+![Figure 1 - Sleep Sound application interface default: scan state](https://user-images.githubusercontent.com/42701588/102657332-5840b680-412a-11eb-9085-1276e0f6efcf.png)
+
 Figure 1 above shows the application’s default screen. Although not visible, the application is currently scanning for nearby pairable devices, specifically the Sleep Sound Arduino. Within the code, the UUID of the Sleep Sound Arduino specified in the Arduino sketch is the only UUID the application is allowed to connect to, so although there may be other devices nearby, it will not recognize them. All the buttons and sound selection are disabled so the user doesn’t really have to do much but wait.
 
 In the event that the application cannot find the Sleep Sound Arduino, the bluetooth scanning will time-out, in which case Figure 2 above shows what happens to the application. In bright red text, the application shows the user that it could not find the Arduino and therefore could not connect to it. At this point, the user would have to do some troubleshooting on their own to figure out why, but all the user has to do to rescan would be to restart the application. 
