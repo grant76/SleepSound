@@ -92,11 +92,19 @@ The operation of the application is best illustrated using a finite state machin
 
 Figure 1 above shows the application’s default screen. Although not visible, the application is currently scanning for nearby pairable devices, specifically the Sleep Sound Arduino. Within the code, the UUID of the Sleep Sound Arduino specified in the Arduino sketch is the only UUID the application is allowed to connect to, so although there may be other devices nearby, it will not recognize them. All the buttons and sound selection are disabled so the user doesn’t really have to do much but wait.
 
+![Figure 2 - Sleep Sound application interface: time-out state](https://user-images.githubusercontent.com/42701588/102657533-ace43180-412a-11eb-8c84-a6474bad8f46.png)
+
 In the event that the application cannot find the Sleep Sound Arduino, the bluetooth scanning will time-out, in which case Figure 2 above shows what happens to the application. In bright red text, the application shows the user that it could not find the Arduino and therefore could not connect to it. At this point, the user would have to do some troubleshooting on their own to figure out why, but all the user has to do to rescan would be to restart the application. 
+
+![Figure 3 - Sleep Sound application interface: found state](https://user-images.githubusercontent.com/42701588/102657583-c71e0f80-412a-11eb-8f66-a08e031a0397.png)
 
 On the opposite side of the spectrum, if the application is able to find the Sleep Sound Arduino, the “Arduino Status” changes to “Found!” in bright green text. The application doesn’t automatically connect to the Arduino so the user is given the responsibility of manually connecting by simply pressing the “Connect” button, as shown in Figure 3 above. 
 
+![Figure 4 - Sleep Sound application interface: connected state](https://user-images.githubusercontent.com/42701588/102657653-e4eb7480-412a-11eb-9982-e18ed9cabbbf.png)
+
 Once the user prompts the connection to the Arduino, the “Connection Status” changes to “Connected!” in bright green text. At this point, the sound library is enabled so the user can choose their preferred sound and prompt “Play” or disconnect from the application altogether. Figure 4 above shows this. The sounds in the sound library were sourced from YouTube and converted to mp3 (Gentle Ocean Waves, 2015)(therelaxedguy, 2014). From there, the mp3 files were stored in a specific location on the phone where the application had access to in order to play the sounds.  
+
+![Figure 5 - Sleep Sound application interface: play state](https://user-images.githubusercontent.com/42701588/102657700-fc2a6200-412a-11eb-9e69-4ef91c48f096.png)
 
 Once the user prompts the “Play”, the sound library is once again disabled but this time the “Pause” button is enabled. If the user hits “Pause”, it will return to the connected state where the user can choose their sound again. At this point, their sound selection should be playing through their phone speaker or through a connected bluetooth connection, if their phone can support multiple bluetooth devices. The user can choose to disconnect from the Arduino anytime in the connected and play state. If they do, they will simply be returned to the scan state, or default, and the process starts over again. 
 
