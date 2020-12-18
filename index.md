@@ -64,6 +64,8 @@ Originally our team had planned to use a Long-Short Term Memory (LSTM) model.  I
 
 Audio data was collected on the Arduino Nano using the acquisition tools available in Edge Impulse Studio (EIS).  The Arduino uses a pulse density modulation (PDM) scheme to capture audio data.  PDM keeps noise low in the desired frequency band, thus improving signal integrity (Kite).  The EIS tools were intuitive and efficient.  They provided a GUI to interface directly with the Arduino that allowed us to easily capture and label the data.  It also handled the reshaping of data to be input into our machine learning model.
 
+![Training and Test Data](https://user-images.githubusercontent.com/42701588/102657893-588d8180-412b-11eb-9395-745d30d67df9.png)
+
 In regards to a no disturbance, audio was recorded in quiet rooms with a lack of abrupt sounds.
 
 For the disturbance data, we sought out disruptive sounds around bedroom areas.  Dissonant noises produced data that was most distinguishable from an ideal sleeping environment.  These disturbances included, but were not limited to, human voices, items falling to the ground, and doors being shut.  Consonant sounds, such as running appliances, were much more similar to a quiet surroundings and thus made up a smaller proportion of our dataset. 
@@ -75,6 +77,12 @@ All of our labelled audio data is available on the github repository linked abov
 Once our data was collected, the next goal was to determine when a noise of disturbing levels had occurred.  The CNN was trained and produced an astounding 99% accuracy on the validation data.  Our self-imposed success metric for testing was to classify with at least 90% accuracy.  The model passed with flying colors with an accuracy of 98%.
 
 In total we recorded just about 70 minutes of audio, with sixty percent disturbance and the rest no disturbance.  This data was split 80-20-20 for training, validation, and testing. The model uses a batch size of 256, the Adam optimizer, and a binary cross entropy loss function.  It was trained over two-hundred epochs.  This CNN produced an accuracy of 99.6% with a confusion matrix [(99.8% 0.2%) (0.8% 99.2%)].  This model also performed well in testing.  It produced an accuracy of 98.6% on 12 minutes of audio.
+
+![Validation Accuracy](https://user-images.githubusercontent.com/42701588/102658105-c2a62680-412b-11eb-9550-6cca47a19e75.png)
+Validation Accuracy
+
+![Test Accuracy](https://user-images.githubusercontent.com/42701588/102658177-e8333000-412b-11eb-8725-89c3c4ef567a.png)
+Test Accuracy
 
 From our point of view, these results may not be fully indicative of real world conditions.  The data collected was from a limited number of sources that were available to us given the current pandemic.  These sources include human voices, household appliances, dropped items, loud movement, and silent rooms.  The model may have been too finely tuned to the recording  surroundings and may not perform as well in new environments.
 
