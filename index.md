@@ -78,9 +78,34 @@ In total we recorded just about 70 minutes of audio, with sixty percent disturba
 
 From our point of view, these results may not be fully indicative of real world conditions.  The data collected was from a limited number of sources that were available to us given the current pandemic.  These sources include human voices, household appliances, dropped items, loud movement, and silent rooms.  The model may have been too finely tuned to the recording  surroundings and may not perform as well in new environments.
 
+### Arduino Implementation
+
+The machine learning model is converted to a Tensorflow Lite model and housed on the Arduino Nano 33 BLE Sense board. The Arduino uses the onboard digital microphone to record sound from the environment, classify the sound, and relay this information to the application on the Android phone where it adjusts the volume of the white noise accordingly. In order to connect the Arduino and the Android phone, we decided to use Bluetooth Low Energy, or BLE. The reason for using this is because the Arduino also has a BLE module onboard so it requires less hardware and realistically, the Arduino would be a standalone device placed near a sound source and is meant to be a set-it-and-forget-it sort of device so energy conservation is also a consideration. In a BLE relationship, the Arduino would be acting as the peripheral where the Android phone would be acting as the central. We used Arduino’s built-in BLE library in order to create our “Sleep Sound Service”. We did this by giving our device a name to search for, a universally unique identifier for the service, and a universally unique identifier for the transfer characteristic. The characteristic is initialized as a “BLEFloatCharacteristic” because we would be using this characteristic to send data of type float to the Android application. As an added feature, in the event that the Android application connects to the Arduino, the built-in LED on the Arduino should light up, signifying a connection. If the light is off, no connection is made or the user disconnected from the Arduino. Our Arduino code to connect to an Android application using BLE is a modified version of C. Thomas Brittain’s code (Ladvien, 2020).
+
+### Android Application Implementation
+
+The purpose of the Android application is to basically connect the user to the machine learning model on the Arduino. The Arduino does all of the heavy lifting by recording the sound in the environment, running it through the machine learning model, and sending data to the phone where that data is used to adjust the volume of the sound played from the phone. All the user has to do is wait for the application to find the Arduino, prompt a connection, choose their preferred sound to play, hit play, and go to sleep while everything else is done for them. 
+
+The operation of the application is best illustrated using a finite state machine. There’s a total of 5 states: scan (default), found, connected, play, and time-out.
+
+Figure 1 above shows the application’s default screen. Although not visible, the application is currently scanning for nearby pairable devices, specifically the Sleep Sound Arduino. Within the code, the UUID of the Sleep Sound Arduino specified in the Arduino sketch is the only UUID the application is allowed to connect to, so although there may be other devices nearby, it will not recognize them. All the buttons and sound selection are disabled so the user doesn’t really have to do much but wait.
+
+In the event that the application cannot find the Sleep Sound Arduino, the bluetooth scanning will time-out, in which case Figure 2 above shows what happens to the application. In bright red text, the application shows the user that it could not find the Arduino and therefore could not connect to it. At this point, the user would have to do some troubleshooting on their own to figure out why, but all the user has to do to rescan would be to restart the application. 
+
+On the opposite side of the spectrum, if the application is able to find the Sleep Sound Arduino, the “Arduino Status” changes to “Found!” in bright green text. The application doesn’t automatically connect to the Arduino so the user is given the responsibility of manually connecting by simply pressing the “Connect” button, as shown in Figure 3 above. 
+
+Once the user prompts the connection to the Arduino, the “Connection Status” changes to “Connected!” in bright green text. At this point, the sound library is enabled so the user can choose their preferred sound and prompt “Play” or disconnect from the application altogether. Figure 4 above shows this. The sounds in the sound library were sourced from YouTube and converted to mp3 (Gentle Ocean Waves, 2015)(therelaxedguy, 2014). From there, the mp3 files were stored in a specific location on the phone where the application had access to in order to play the sounds.  
+
+Once the user prompts the “Play”, the sound library is once again disabled but this time the “Pause” button is enabled. If the user hits “Pause”, it will return to the connected state where the user can choose their sound again. At this point, their sound selection should be playing through their phone speaker or through a connected bluetooth connection, if their phone can support multiple bluetooth devices. The user can choose to disconnect from the Arduino anytime in the connected and play state. If they do, they will simply be returned to the scan state, or default, and the process starts over again. 
+
+The Android application is built on Android 10 API level 29 using Java in Android Studio. The primary test device is a Oneplus 5 running a proprietary OS called OxygenOS version 10.0.1, which is based off of Android 10. The basis of the code our application was built on top of was thanks to Maty (Maty, 2020).
+
+
 ### Future Works
 
 For future iterations of this project we’d like to make our model multi-class and predict the maximum magnitude of the audio signal.  A multiclass neural network would be more generalized and robust.  To use more than two classes, we’d need to collect quality audio data from a wide variety of sources.  In regards to predictions, we’d implement a regression model in addition to the classification currently used.  Predicting the loudest noise would allow our noise generating application to better mitigate the disturbance.
+
+Another consideration for future iterations of this project would be to try to incorporate other non-invasive hardware sensors as well to help further improve sleep. Sound is only one of many factors that affect a person’s quality of sleep. There are other factors in the environment that we can control, such as the temperature, humidity, and brightness. Each factor is a challenge of its own to try to monitor and control, but would ultimately lead to the greatest possible quality of sleep. 
 
 ### Timeline and Deliverables
 
@@ -129,7 +154,15 @@ Week 10:
 
 #### References
 
+ArduinoBLE. Arduino Available at: [https://www.arduino.cc/en/Reference/ArduinoBLE](https://www.arduino.cc/en/Reference/ArduinoBLE). (Accessed: 18th December 2020)
+
+Bluetooth low energy overview &nbsp;: &nbsp; Android Developers. Android Developers Available at: [https://developer.android.com/guide/topics/connectivity/bluetooth-le](https://developer.android.com/guide/topics/connectivity/bluetooth-le). (Accessed: 18th December 2020) 
+
 Farokhnezhad Afshar, P., Bahramnezhad, F., Asgari, P. & Shiri, M. Effect of White Noise on Sleep in Patients Admitted to a Coronary Care. Journal of caring sciences (2016). Available at: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4923834/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4923834/). (Accessed: 3rd November 2020) 
+
+Gentle Ocean Waves 20 Minutes Meditation Relaxation Sleep Better Reduce Stress. YouTube (2015). Available at: [https://www.youtube.com/watch?v=R6Dv0h9DdBc](https://www.youtube.com/watch?v=R6Dv0h9DdBc). (Accessed: 18th December 2020)
+
+Getting Started with Bluetooth LE on the Arduino Nano 33 Sense. Ladvien's Lab (2020). Available at: [https://ladvien.com/arduino-nano-33-bluetooth-low-energy-setup/](https://ladvien.com/arduino-nano-33-bluetooth-low-energy-setup/). (Accessed: 18th December 2020) 
 
 Halperin, D. Environmental noise and sleep disturbances: A threat to health? Sleep science (Sao Paulo, Brazil) (2014). Available at: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4608916/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4608916/). (Accessed: 3rd November 2020) 
 
@@ -143,6 +176,8 @@ K. Greff, R. K. Srivastava, J. Koutník, B. R. Steunebrink and J. Schmidhuber, "
 
 Kite, T. Understanding PDM Digital Audio. Available at: [http://users.ece.utexas.edu/~bevans/courses/rtdsp/lectures/10_Data_Conversion/AP_Understanding_PDM_Digital_Audio.pdf](http://users.ece.utexas.edu/~bevans/courses/rtdsp/lectures/10_Data_Conversion/AP_Understanding_PDM_Digital_Audio.pdf).  
 
+Maty. BlueCArd - part 6 - Controlling the Arduino Nano Bluetooth module from Android device. Techblog (2020). Available at: [https://www.thinker-talk.com/post/bluecard-part-6-controlling-the-arduino-nano-bluetooth-module-from-android-device](https://www.thinker-talk.com/post/bluecard-part-6-controlling-the-arduino-nano-bluetooth-module-from-android-device). (Accessed: 18th December 2020) 
+
 Olah, C. Understanding LSTM Networks. Understanding LSTM Networks -- colah's blog (2015). Available at: [https://colah.github.io/posts/2015-08-Understanding-LSTMs/](https://colah.github.io/posts/2015-08-Understanding-LSTMs/). (Accessed: 6th November 2020)
 
 Phi, M. Illustrated Guide to LSTM's and GRU's: A step by step explanation. Medium (2020). Available at: [https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21](https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21). (Accessed: 6th November 2020)
@@ -154,5 +189,7 @@ REM Sleep Tracker. REMtrack Available at: [https://ciankc.github.io/REMtrack/](h
 Sayyad, R. A. How to Use Convolutional Neural Networks for Time Series Classification. (2020). Available at: [https://medium.com/@Rehan_Sayyad/how-to-use-convolutional-neural-networks-for-time-series-classification-80575131a474](https://medium.com/@Rehan_Sayyad/how-to-use-convolutional-neural-networks-for-time-series-classification-80575131a474).  
 
 TensorFlow Lite inference. Available at: [https://www.tensorflow.org/lite/guide/inference](https://www.tensorflow.org/lite/guide/inference).  
+
+therelaxedguy. 30 MINUTES Rain Sounds (no music or thunder), Light Rain for Sleep, Relaxing, Meditate, Study, Yoga. YouTube (2014). Available at: [https://www.youtube.com/watch?v=j9nhecEWMuE](https://www.youtube.com/watch?v=j9nhecEWMuE). (Accessed: 18th December 2020) 
 
 Writer, T. E. Audio Classification Using CNN - Coding Example. (2019). Available at: [https://medium.com/x8-the-ai-community/audio-classification-using-cnn-coding-example-f9cbd272269e](https://medium.com/x8-the-ai-community/audio-classification-using-cnn-coding-example-f9cbd272269e).    
