@@ -12,7 +12,7 @@ Derek Wong and Grant Young
 
 ### Links
 
-[Presentation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4923834/)
+[Presentation](https://youtu.be/WOfA63xrlg0)
 
 [Github Repository](https://github.com/grant76/SleepSound)
 
